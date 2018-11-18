@@ -19,10 +19,20 @@ const randomNumber = function () {
 }
 
 const lista = function () {
+    let i = 0
     const ul = document.createElement('ul')
     const li = document.createElement('li')
     const text = document.createTextNode('lubie placki')
     document.body.appendChild(ul).appendChild(li).appendChild(text)
+
+    const deleteButton = document.createElement('button')
+    deleteButton.innerText = 'usuń zadanie'
+    li.appendChild(deleteButton)
+    deleteButton.addEventListener('click', function () {
+        document.getElementsByTagName('li')[i].style.color = 'red'
+        i++})
+   
+   
 }
 
 const a = new ClickableButton('wygeneruj liczbe', randomNumber)
