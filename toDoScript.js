@@ -1,3 +1,9 @@
+const Event = function(){
+    const listElement = document.createElement('li')
+}
+
+
+
 
 function ClickableButton(label, onClickHandler) {
     this.label = label
