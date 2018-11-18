@@ -14,19 +14,29 @@ const global = function () {
             const eventText = document.createElement('input')
             const addEventButton = document.createElement('button')
             const ul = document.createElement('ul')
+
+
+
             addEventButton.innerText = 'Add Event'
+
+
             addEventButton.addEventListener('click', function () {
+                
                 const event = document.createElement('li')
+                const deleteButton = document.createElement('button')
+                deleteButton.innerText = 'Delete this Event'
                 event.innerText = eventText.value
                 ul.appendChild(event)
-                console.log('cholera')})
+                ul.appendChild(deleteButton)
+                console.log('cholera')
+            })
 
             this.place.appendChild(eventText)
             this.place.appendChild(addEventButton)
             this.place.appendChild(ul)
         }
 
-        myList(){
+        myList() {
         }
 
         render() {
