@@ -1,25 +1,32 @@
-console.log('lubie placki')
 
-// document.querySelector('.event-add').addEventListener('click', () => {
-//     document.createElement
-//     document.querySelector('.event-list').innerHTML = `<li>test dodany</li>`
-//     console.log('lubie 2placki')
-// })
+function ClickableButton(label, onClickHandler) {
+    this.label = label
+    this.onClickHandler = onClickHandler
 
-// const myArray = []
-
-
-var Event = function () {
-    this.eventContent = document.querySelector('.event-input').value;
-    document.querySelector('.event-list').innerHTML = `<li>${this.eventContent}</li>`
+    this.render()
 }
 
-document.querySelector('.event-add').addEventListener('click', () => {
-new Event;
-})
+ClickableButton.prototype.render = function () {
+    const button = document.createElement('button')
+    button.innerText = this.label
+    button.addEventListener('click', this.onClickHandler)
+    document.body.appendChild(button)
 
-// document.querySelector('.event-add').addEventListener('click', () => {
-//     document.createElement()
-//     document.querySelector('.event-list').innerHTML = `<li>test dodany</li>`
-//     console.log('kreatorem go')
-// })
+}
+
+const randomNumber = function () {
+    console.log(Math.random())
+}
+
+const lista = function () {
+    const ul = document.createElement('ul')
+    const li = document.createElement('li')
+    const text = document.createTextNode('lubie placki')
+    document.body.appendChild(ul).appendChild(li).appendChild(text)
+}
+
+const a = new ClickableButton('wygeneruj liczbe', randomNumber)
+
+const b = new ClickableButton('lista', lista)
+
+
