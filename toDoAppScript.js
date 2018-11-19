@@ -3,9 +3,8 @@ const global = function () {
     class Event {
         constructor(place, arr) {
             this.place = place || document.body
+            this.event = event
             this.init()
-            this.deleteButton = deleteButton
-            
         }
 
         init() {
@@ -13,35 +12,39 @@ const global = function () {
         }
 
         pageElements() {
-           
+
             const eventText = document.createElement('input')
             const addEventButton = document.createElement('button')
             const ul = document.createElement('ul')
             const arr = []
-            let deleteButtonClass = 0
+
             addEventButton.innerText = 'Add Event'
 
             addEventButton.addEventListener('click', function () {
-                
-                const event = document.createElement('li')
+                event = document.createElement('li')
+                const label = document.createElement('p')
                 const deleteButton = document.createElement('button')
-                deleteButton.classList.add(deleteButtonClass)
+                event.appendChild(label)
+                event.appendChild(deleteButton)
+
+
+
+
                 this.arr = arr.push(eventText.value)
-                event.innerText = arr[arr.length-1]
+                label.innerText = arr[arr.length - 1]
                 console.log('test')
                 console.log(arr)
-                deleteButtonClass++
-                
-                
+
                 event.style.width = 0;
                 deleteButton.style.marginBottom = '20px'
                 deleteButton.innerText = 'Delete this Event'
-                deleteButton.addEventListener('click', function () {
-                    console.log(deleteButtonClass)
+                deleteButton.addEventListener('click', () => {
+                    console.log(deleteButton.innerText)
                 })
 
 
-               
+
+
                 ul.appendChild(event)
                 ul.appendChild(deleteButton)
             })
@@ -49,6 +52,14 @@ const global = function () {
             this.place.appendChild(eventText)
             this.place.appendChild(addEventButton)
             this.place.appendChild(ul)
+
+
+
+        }
+
+
+        eventClick() {
+            this.event.addEventListener('click', () => console.log('tekst dotkniety'))
         }
 
         myList() {
