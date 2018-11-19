@@ -14,18 +14,22 @@ const global = function () {
             const eventText = document.createElement('input')
             const addEventButton = document.createElement('button')
             const ul = document.createElement('ul')
-
+            const arr = [] || arr
 
 
             addEventButton.innerText = 'Add Event'
 
 
             addEventButton.addEventListener('click', function () {
-                
                 const event = document.createElement('li')
                 const deleteButton = document.createElement('button')
-                deleteButton.innerText = 'Delete this Event'
                 event.innerText = eventText.value
+                arr.push(event.innerText)
+                
+                event.style.width = 0;
+                deleteButton.style.marginBottom = '20px'
+                deleteButton.innerText = 'Delete this Event'
+               
                 ul.appendChild(event)
                 ul.appendChild(deleteButton)
                 console.log('cholera')
