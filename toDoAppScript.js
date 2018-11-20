@@ -1,11 +1,11 @@
 
 const global = function () {
     class Event {
-        constructor(place, arr) {
+        constructor(place) {
             this.place = place || document.body
             this.init()
-            this.deleteButton = deleteButton
-            
+            this.arr = []
+
         }
 
         init() {
@@ -13,35 +13,23 @@ const global = function () {
         }
 
         pageElements() {
-           
+
             const eventText = document.createElement('input')
             const addEventButton = document.createElement('button')
             const ul = document.createElement('ul')
-            const arr = []
-            let deleteButtonClass = 0
             addEventButton.innerText = 'Add Event'
 
             addEventButton.addEventListener('click', function () {
-                
-                const event = document.createElement('li')
-                const deleteButton = document.createElement('button')
-                deleteButton.classList.add(deleteButtonClass)
-                this.arr = arr.push(eventText.value)
-                event.innerText = arr[arr.length-1]
-                console.log('test')
-                console.log(arr)
-                deleteButtonClass++
-                
-                
+
+                this.arr.push(eventText.value)
+
+
                 event.style.width = 0;
                 deleteButton.style.marginBottom = '20px'
                 deleteButton.innerText = 'Delete this Event'
-                deleteButton.addEventListener('click', function () {
-                    console.log(deleteButtonClass)
-                })
+                deleteButton.addEventListener('click', (e) => this.deleteClickHandler(e, index)
+                )
 
-
-               
                 ul.appendChild(event)
                 ul.appendChild(deleteButton)
             })
@@ -49,6 +37,38 @@ const global = function () {
             this.place.appendChild(eventText)
             this.place.appendChild(addEventButton)
             this.place.appendChild(ul)
+        }
+
+
+
+        render() {
+            this.location.innerHTML = ''
+            const ul = document.createElement('ul')
+
+            this.pageElements()
+
+            this.arr.forEach((task, index) => {
+                const li = document.createElement('li')
+                const deleteButton = document.createElement('button')
+
+                li.innerText = task.text
+                deleteButton.innerText = 'delete this event'
+
+                deleteButton.addEventListener('click', (e) => this.deleteClickHandler(e, index))
+
+                this.taskIsCompletedStyle(task, li)
+
+                li.appendChild(button)
+                ul.appendChild(li)
+            })
+
+            this.location.appendChild(ul)
+        }
+
+        deleteClickHandler(e, index) {
+            e.stopPropagation()
+            this.tasks = this.tasks.slice(0, index).concat(this.tasks.slice(index + 1))
+            this.render()
         }
 
         myList() {
