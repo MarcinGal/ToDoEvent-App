@@ -44,11 +44,16 @@
                 const deleteButton = document.createElement('button')
                 this.isTouched = false
                 li.innerText = event.text
-                li.addEventListener('click', this.eventClick(event))
+                li.addEventListener('click', () => this.eventClick(event))
+                // li.LineThroughStyle(event)
                 deleteButton.style.margin = '0 0 20px 10px'
                 deleteButton.innerText = 'Delete this Event'
 
                 deleteButton.addEventListener('click', (e) => this.deleteClickHandler(e, index))
+
+                if (event.isTouched === false) {
+                    li.style.textDecoration = "line-through"
+                }
 
                 li.appendChild(deleteButton)
                 ul.appendChild(li)
@@ -63,17 +68,16 @@
 
         eventClick(element) {
             this.element = element
-            if (this.element.isTouched === false){
+            if (this.element.isTouched === false) {
                 this.element.isTouched = true
-                console.log('1')
-                // this.element.style.textDecoration = 'line-through'
-            }else {
+
+            } else {
                 this.element.isTouched = false
-                console.log('2')
-                // this.element.style.textDecoration = 'none'
             }
-            
+            this.render()
+
         }
+
     }
 
     class SingleEvent {
