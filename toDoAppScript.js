@@ -7,31 +7,44 @@
             this.init()
         }
 
-        init() {
-            this.render()
+        init(arr) {
+            this.render(arr)
         }
 
-        addEvent(text) {
+        addEvent(text, arr) {
             this.arr.push(new SingleEvent(text))
-            this.render()
+            this.render(arr)
         }
 
         pageElements() {
             const eventText = document.createElement('input')
             const addEventButton = document.createElement('button')
+            const filterText = document.createElement('input')
+            const filterButton = document.createElement('button')
+
             addEventButton.innerText = 'Add Event'
             addEventButton.style.marginLeft = '10px'
+            filterText.style.marginLeft = '80px'
+            filterButton.innerText = 'Search'
+            filterButton.style.marginLeft = '10px'
+
 
             addEventButton.addEventListener('click', () => {
-                this.addEvent(eventText.value)  
-                this.addEventToLocalStorage()              
+                this.addEvent(eventText.value)
+                this.addEventToLocalStorage()
+            })
+
+            filterButton.addEventListener('click', () => {
+                this.filterFunction(filterText.value)
             })
 
             this.place.appendChild(eventText)
             this.place.appendChild(addEventButton)
+            this.place.appendChild(filterText)
+            this.place.appendChild(filterButton)
         }
 
-        render() {
+        render(arr) {
             this.place.innerHTML = ''
             this.pageElements()
 
@@ -45,13 +58,13 @@
 
                 deleteButton.style.margin = '0 0 20px 10px'
                 deleteButton.innerText = 'Delete this Event'
-              
+
 
                 if (event.isTouched === false) {
                     li.style.textDecoration = "line-through"
                 }
 
-                deleteButton.addEventListener('click', (e) => { 
+                deleteButton.addEventListener('click', (e) => {
                     this.deleteClickHandler(e, index)
                     this.addEventToLocalStorage()
                 })
@@ -60,9 +73,6 @@
                 ul.appendChild(li)
             })
             this.place.appendChild(ul)
-
-
-
         }
 
 
@@ -72,7 +82,7 @@
 
         deleteClickHandler(element, index) {
             this.arr = this.arr.slice(0, index).concat(this.arr.slice(index + 1))
-            this.render()
+            this.render(arr)
         }
 
         eventClick(element) {
@@ -83,17 +93,23 @@
             } else {
                 this.element.isTouched = false
             }
-            this.render()
+            this.render(arr)
         }
 
-       addEventToLocalStorage() {
+        addEventToLocalStorage() {
             localStorage.setItem('addedEvents', `${JSON.stringify(this.arr)}`)
         }
-    
+
         removeEventfromLocalStorage(index) {
             localStorage.removeItem(`${JSON.parse(this.arr)[index]}`)
         }
+
+        filterFunction(input, array) {
+            const filteredArr = array.filter((element) => { element.text === input })
+            this.render(filteredArr)
+        }
     }
+
 
     class SingleEvent {
         constructor(text) {
