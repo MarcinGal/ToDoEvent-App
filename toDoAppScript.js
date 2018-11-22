@@ -7,8 +7,8 @@
             this.init()
         }
 
-        init(arr) {
-            this.render(arr)
+        init() {
+            this.render()
         }
 
         addEvent(text, arr) {
@@ -35,7 +35,7 @@
             })
 
             filterButton.addEventListener('click', () => {
-                this.filterFunction(filterText.value)
+                this.filterFunction(filterText)
             })
 
             this.place.appendChild(eventText)
@@ -47,9 +47,10 @@
         render(arr) {
             this.place.innerHTML = ''
             this.pageElements()
+            const array = arr || this.arr
 
             const ul = document.createElement('ul')
-            this.arr.forEach((event, index) => {
+            array.forEach((event, index) => {
                 const li = document.createElement('li')
                 const deleteButton = document.createElement('button')
                 this.isTouched = false
@@ -82,7 +83,7 @@
 
         deleteClickHandler(element, index) {
             this.arr = this.arr.slice(0, index).concat(this.arr.slice(index + 1))
-            this.render(arr)
+            this.render(this.arr)
         }
 
         eventClick(element) {
@@ -93,7 +94,7 @@
             } else {
                 this.element.isTouched = false
             }
-            this.render(arr)
+            this.render(this.arr)
         }
 
         addEventToLocalStorage() {
@@ -104,8 +105,9 @@
             localStorage.removeItem(`${JSON.parse(this.arr)[index]}`)
         }
 
-        filterFunction(input, array) {
-            const filteredArr = array.filter((element) => { element.text === input })
+        filterFunction(input) {
+            const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g,'') === input.value.toLowerCase().replace(/\s/g,''))
+            console.log(filteredArr)
             this.render(filteredArr)
         }
     }
