@@ -21,13 +21,19 @@
             const addEventButton = document.createElement('button')
             const filterText = document.createElement('input')
             const filterButton = document.createElement('button')
+            const allEventsButton = document.createElement('button')
+            const completedEEventsButton = document.createElement('button')
+            const uncompletedEventsButton = document.createElement('button')
 
             addEventButton.innerText = 'Add Event'
             addEventButton.style.marginLeft = '10px'
             filterText.style.marginLeft = '80px'
             filterButton.innerText = 'Search'
             filterButton.style.marginLeft = '10px'
-
+            allEventsButton.innerText = 'All events'
+            completedEEventsButton.innerText = 'Completed Events'
+            uncompletedEventsButton.innerText = 'Uncompleted Events'
+            allEventsButton.style.marginLeft = '40px'
 
             addEventButton.addEventListener('click', () => {
                 this.addEvent(eventText.value)
@@ -38,10 +44,27 @@
                 this.filterFunction(filterText)
             })
 
+            allEventsButton.addEventListener('click', () => {
+                this.render(this.arr)
+            })
+
+            completedEEventsButton.addEventListener('click', () => {
+                const completedEventsArr = this.arr.filter((element) => element.isTouched === false)
+                this.render(completedEventsArr)
+            })
+
+            uncompletedEventsButton.addEventListener('click', () => {
+                const uncompletedEventsArr = this.arr.filter((element) => element.isTouched !== false)
+                this.render(uncompletedEventsArr)
+            })
+
             this.place.appendChild(eventText)
             this.place.appendChild(addEventButton)
             this.place.appendChild(filterText)
             this.place.appendChild(filterButton)
+            this.place.appendChild(allEventsButton)
+            this.place.appendChild(completedEEventsButton)
+            this.place.appendChild(uncompletedEventsButton)
         }
 
         render(arr) {
@@ -106,7 +129,7 @@
         }
 
         filterFunction(input) {
-            const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g,'') === input.value.toLowerCase().replace(/\s/g,''))
+            const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g, '') === input.value.toLowerCase().replace(/\s/g, ''))
             console.log(filteredArr)
             this.render(filteredArr)
         }
