@@ -125,7 +125,8 @@
         }
 
         filterFunction(input) {
-            const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g, '') === input.value.toLowerCase().replace(/\s/g, ''))
+            const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g, '').includes(`${input.value.toLowerCase().replace(/\s/g, '')}`))
+            // .toLowerCase().replace(/\s/g, ''))
             console.log(filteredArr)
             this.render(filteredArr)
         }
