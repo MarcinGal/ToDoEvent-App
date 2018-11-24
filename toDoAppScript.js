@@ -1,4 +1,3 @@
-
 (function () {
     class Event {
         constructor(place) {
@@ -129,7 +128,6 @@
             this.render(filteredArr)
         }
     }
-
 
     class SingleEvent {
         constructor(text) {
