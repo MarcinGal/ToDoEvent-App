@@ -53,7 +53,7 @@
             })
 
             uncompletedEventsButton.addEventListener('click', () => {
-                const uncompletedEventsArr = this.arr.filter((element) => element.isTouched === false)
+                const uncompletedEventsArr = this.arr.filter((element) => element.isTouched !== true)
                 this.render(uncompletedEventsArr)
             })
 
