@@ -99,11 +99,6 @@
             this.place.appendChild(ul)
         }
 
-
-        eventClick() {
-            this.event.addEventListener('click', () => console.log('tekst dotkniety'))
-        }
-
         deleteClickHandler(element, index) {
             this.arr = this.arr.slice(0, index).concat(this.arr.slice(index + 1))
             this.render(this.arr)
@@ -117,6 +112,7 @@
             } else {
                 this.element.isTouched = false
             }
+            localStorage.setItem('addedEvents', `${JSON.stringify(this.arr)}`)
             this.render(this.arr)
         }
 
