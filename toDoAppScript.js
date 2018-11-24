@@ -49,12 +49,12 @@
             })
 
             completedEEventsButton.addEventListener('click', () => {
-                const completedEventsArr = this.arr.filter((element) => element.isTouched === false)
+                const completedEventsArr = this.arr.filter((element) => element.isTouched === true)
                 this.render(completedEventsArr)
             })
 
             uncompletedEventsButton.addEventListener('click', () => {
-                const uncompletedEventsArr = this.arr.filter((element) => element.isTouched !== false)
+                const uncompletedEventsArr = this.arr.filter((element) => element.isTouched === false)
                 this.render(uncompletedEventsArr)
             })
 
@@ -76,7 +76,7 @@
             array.forEach((event, index) => {
                 const li = document.createElement('li')
                 const deleteButton = document.createElement('button')
-                this.isTouched = false
+                this.isTouched = true
                 li.innerText = event.text
                 li.addEventListener('click', () => this.eventClick(event))
 
@@ -84,7 +84,7 @@
                 deleteButton.innerText = 'Delete this Event'
 
 
-                if (event.isTouched === false) {
+                if (event.isTouched === true) {
                     li.style.textDecoration = "line-through"
                 }
 
@@ -106,11 +106,11 @@
 
         eventClick(element) {
             this.element = element
-            if (this.element.isTouched === false) {
-                this.element.isTouched = true
+            if (this.element.isTouched === true) {
+                this.element.isTouched = false
 
             } else {
-                this.element.isTouched = false
+                this.element.isTouched = true
             }
             localStorage.setItem('addedEvents', `${JSON.stringify(this.arr)}`)
             this.render(this.arr)
@@ -126,8 +126,6 @@
 
         filterFunction(input) {
             const filteredArr = this.arr.filter((element) => element.text.toLowerCase().replace(/\s/g, '').includes(`${input.value.toLowerCase().replace(/\s/g, '')}`))
-            // .toLowerCase().replace(/\s/g, ''))
-            console.log(filteredArr)
             this.render(filteredArr)
         }
     }
